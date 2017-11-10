@@ -1,0 +1,21 @@
+/*all image tags inside of thumbnails*/
+.thumbnail img {
+    width: 100%;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+/*only the captions inside of a thumbnail*/
+.thumbnail .caption-full {
+    padding: 9px;
+}
+
+#deleteForm {
+    display: inline;
+}
+
+.deleteForm {
+    display: inline;
+}
