@@ -18,9 +18,9 @@ var commentRoutes       = require("./routes/comments"),
     indexRoutes          = require("./routes/index")
 
 
-mongoose.connect("mongodb://localhost/yelp_camp", {useMongoClient: true})
+// mongoose.connect("mongodb://localhost/yelp_camp", {useMongoClient: true})
+mongoose.connect("mongodb://cvans1:CS!2bmpcDA@ds259305.mlab.com:59305/cvansyelpcamp", {useMongoClient: true})
 app.use(bodyParser.urlencoded({extended: true}));
-//Every rendered file is assumed to be ejs, unless otherwise specified
 app.set("view engine", "ejs");
 //Tell our app to serve the public directory 
 app.use(express.static(__dirname + "/public"));
