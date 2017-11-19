@@ -2,12 +2,21 @@
 
 
 <div class="container">
-    <header class="jumbotron">
+    <header class="jumbotron jumbotron-inverse">
         <div class="container">
             <h1>This is the Campgrounds page</h1>
             <p>View our hand-picked campgrounds from all over the world</p>
             <p>
                <a class="btn btn-primary btn-lg" href="/campgrounds/new">Add a new campground!</a>
+            </p>
+            <p>
+                <form action="/campgrounds" method="GET" class="form-inline">
+                    <div class="form-group">
+                        <input type="text" name="search" placeholder="Search campground.." class="form-control">
+                        <input type="submit" value="Search" class="btn btn-default">                      
+                    </div>
+
+                </form>
             </p>
         </div>
     </header>
