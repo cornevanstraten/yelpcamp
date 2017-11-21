@@ -6,7 +6,9 @@
 var express = require("express");
 var router = express.Router();
 var Campground = require("../models/campground.js");
+var Comment = require("../models/comment.js");
 var middleware = require("../middleware/index.js");
+var geocoder = require("geocoder");
 
 
 
@@ -26,11 +28,11 @@ router.get("/", function(req, res){
             }
         });
     } else {
-        Campground.find({}, function(err, campgroundz){
+        Campground.find({}, function(err, allCampgrounds){
             if (err) {
-                console.log(err)
+                console.log(err);
             } else {
-                res.render("campgrounds/index", {campgrounds: campgroundz});
+                res.render("campgrounds/index", {campgrounds: allCampgrounds});
             }
         });
     }
@@ -50,19 +52,25 @@ router.post("/", middleware.isLoggedIn, function(req, res){
                     id: req.user._id,
                     username: req.user.username
                     }
-    var newCampground = {name: name, price: price, image: image, description: desc, author: author}
-    //create new campground and save to database
+    
+    geocoder.geocode(req.body.location, function (err, data) {
+    var lat = data.results[0].geometry.location.lat;
+    var lng = data.results[0].geometry.location.lng;
+    var location = data.results[0].formatted_address;
+    var newCampground = {name: name, image: image, description: desc, price: price, author:author, location: location, lat: lat, lng: lng};
     Campground.create(newCampground, function(err, newlyCreated){
         if(err){
-            console.log(err)
+            console.log(err);
             //might also want to redirect user back to the form and display an error message
         } else {
-            //redirect back to campgrounds page (default redirect is get request)
+            //redirect back to campgrounds page
             console.log(newlyCreated);
             res.redirect("/campgrounds");
         }
     });
+  });
 });
+
 
 //NEW - form to enter a new campground
 router.get("/new", middleware.isLoggedIn, function(req, res){
