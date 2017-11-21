@@ -8,7 +8,7 @@
                         <li class="list-group-item">Info 1</li>
                         <li class="list-group-item active">Info 2</li>
                         <li class="list-group-item">Info 3</li>
-                </div>
+                </div>     
                 <div id="map"></div>
         </div>
         <div class="col-md-9">
@@ -68,11 +68,11 @@
         center: center,
         scrollwheel: false
     });
-    var contentString = `
-      <strong><%= campground.name %><br />
+    var contentString = "<strong><%= campground.name %><br />
       <%= campground.location %></strong>
-      <p><%= campground.description %></p>
-    `
+      <p><%= campground.description %></p>"
+      
+    
     var infowindow = new google.maps.InfoWindow({
       content: contentString
     });
@@ -86,8 +86,6 @@
   }
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4OAUkHF1i_Kh9es54GRB9uxOw15VUnCw&callback=initMap"></script>
-
- 
 
 
 <% include ../partials/footer %>
