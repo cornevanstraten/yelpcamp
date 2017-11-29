@@ -15,6 +15,10 @@ router.get("/register", function(req, res){
 //handle register/signup logic
 router.post("/register", function(req, res){
     var newUser = new User({username: req.body.username});
+    // eval(require("locus"));
+    if(req.body.adminCode === "PR4X!$"){
+        newUser.isAdmin = true;
+    }
     User.register(newUser, req.body.password, function(err, user){
         if(err){
             req.flash("error", err.message)

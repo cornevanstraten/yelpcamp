@@ -12,8 +12,9 @@ middlewareObj.checkCampgroundOwnership = function(req, res, next){
                 req.flash("error", "404 campground not found");
                 res.redirect("back");
             } else {
-                    if(foundCampground.author.id.equals(req.user._id)) { next();
-                        } else {
+                    if(foundCampground.author.id.equals(req.user._id) || req.user.isAdmin) { 
+                        next();
+                    } else {
                             req.flash("error", "You don't have permission to do that");
                             res.redirect("back") 
                         }
@@ -32,7 +33,7 @@ middlewareObj.checkCommentOwnership = function(req, res, next){
                 req.flash("error", "404 comment not found");
                 res.redirect("back");
             } else{
-                if(foundComment.author.id.equals(req.user._id)){ next();
+                if(foundComment.author.id.equals(req.user._id) || req.user.isAdmin){ next();
                 } else {
                     req.flash("error", "You don't have permission to do that");
                     res.redirect("back");
