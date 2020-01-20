@@ -1,5 +1,6 @@
 //DEPENDENCIES
-var express     = require("express"),
+var dotenv      = require("dotenv").config(),
+    express     = require("express"),
     app         = express(),
     bodyParser  = require("body-parser"),
     mongoose    = require("mongoose"),
@@ -13,7 +14,7 @@ var express     = require("express"),
     seedDB      = require("./seeds.js");
 
 //requiring ROUTES
-var commentRoutes       = require("./routes/comments"), 
+var commentRoutes       = require("./routes/comments"),
     campgroundRoutes    = require("./routes/campgrounds"),
     indexRoutes          = require("./routes/index")
 
@@ -22,7 +23,7 @@ var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp"
 mongoose.connect(url, {useMongoClient: true})
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-//Tell our app to serve the public directory 
+//Tell our app to serve the public directory
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
@@ -31,8 +32,8 @@ app.use(flash());
 
 //PASSPORT Config
 app.use(require("express-session")({
-    secret: "I love Katie and Calvin",
-    resave: false, 
+    secret: "Als achter vliegen vliegen vliegen, vliegen vliegen vliegen na",
+    resave: false,
     saveUninitialized: false
 }));
 app.locals.moment = require("moment");
